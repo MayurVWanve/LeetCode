@@ -9,19 +9,21 @@ class Solution:
         maxD = 0
 
         def maxLen(node):
+            nonlocal maxD
+
             if not node:
                 return 0
             
             else:
-                return 1 + max(maxLen(node.left), maxLen(node.right))
+                l, r = maxLen(node.left), maxLen(node.right)
+                maxD = max(maxD,l+r)
+                return 1 + max(l,r)
         
         if not root:
             return 0
         
         diameter = maxLen(root.left) + maxLen(root.right)
-        diameterLeft = self.diameterOfBinaryTree(root.left)
-        diameterRight = self.diameterOfBinaryTree(root.right)
-        return max(diameterLeft, diameter,diameterRight)
+        return max(maxD, diameter)
 
 
         
