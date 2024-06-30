@@ -5,6 +5,6 @@ class Solution:
             max_list.append(max(nums[i], nums[i]*max_list[i-1],nums[i]*min_list[i-1]))
             min_list.append(min(nums[i], nums[i]*max_list[i-1],nums[i]*min_list[i-1]))
         
-        print(max_list, min_list)
+        # print(max_list, min_list)
         return max(max_list)
         
