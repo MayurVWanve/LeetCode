@@ -32,7 +32,7 @@ class BrowserHistory:
         
 
     def back(self, steps: int) -> str:
-        print("Count_front, Count_back", self.count_front, self.count_back)
+        # print("Count_front, Count_back", self.count_front, self.count_back)
         if steps > self.count_back:
             self.curr = self.head
             self.count_front+=self.count_back
@@ -56,7 +56,7 @@ class BrowserHistory:
         return self.curr.val
 
     def forward(self, steps: int) -> str:
-        print("Count_front, Count_back", self.count_front, self.count_back)
+        # print("Count_front, Count_back", self.count_front, self.count_back)
         if steps > self.count_front:
             self.curr = self.tail.prev
             self.count_back += self.count_front
