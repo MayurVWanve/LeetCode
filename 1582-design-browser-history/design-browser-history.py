@@ -22,13 +22,13 @@ class BrowserHistory:
         self.count_back+=1
         self.count_front = 0
         
-        print("Visit: ")
-        new = self.head
-        while new:
-            print(new.val)
-            new = new.next
+        # print("Visit: ")
+        # new = self.head
+        # while new:
+        #     print(new.val)
+        #     new = new.next
         
-        print("Curr: ", self.curr.val)
+        # print("Curr: ", self.curr.val)
         
 
     def back(self, steps: int) -> str:
@@ -46,12 +46,12 @@ class BrowserHistory:
                 self.count_front +=1
                 steps-=1
 
-        print("Back: ")
-        new = self.head
-        while new:
-            print(new.val)
-            new = new.next
-        print("Curr: ", self.curr.val)
+        # print("Back: ")
+        # new = self.head
+        # while new:
+        #     print(new.val)
+        #     new = new.next
+        # print("Curr: ", self.curr.val)
 
         return self.curr.val
 
@@ -70,12 +70,12 @@ class BrowserHistory:
                 self.count_back+=1
                 steps-=1
 
-        print("Forward: ")
-        new = self.head
-        while new:
-            print(new.val)
-            new = new.next
-        print("Curr: ", self.curr.val)
+        # print("Forward: ")
+        # new = self.head
+        # while new:
+        #     print(new.val)
+        #     new = new.next
+        # print("Curr: ", self.curr.val)
 
         return self.curr.val
         
