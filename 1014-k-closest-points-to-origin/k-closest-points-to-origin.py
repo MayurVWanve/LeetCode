@@ -4,8 +4,8 @@ class Solution:
         heapq.heapify(nums)
         # print(nums)
         nums = heapq.nsmallest(k, nums)
-        ans = [num[1] for num in nums]
-        return ans
+        # ans = [num[1] for num in nums]
+        return [num[1] for num in nums]
 
 
         
