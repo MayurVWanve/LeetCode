@@ -4,7 +4,8 @@ class Solution:
         if n % groupSize != 0:
             return False
 
-        hand.sort()
+        hand.sort() # Complexity bumps to O(nlogn)
+        
         soln = [[] for i in range(n//groupSize)]
 
         for i in hand:
@@ -16,9 +17,7 @@ class Solution:
                     break
             
             if flag == False:
-                return False
-
-        
+                return False        
         return True
                 
         
