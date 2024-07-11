@@ -14,7 +14,7 @@ class Solution:
                 # print("In else loop", char)
                 stack.append(char)
             
-            print(stack)
+            # print(stack)
         
         return ''.join(stack)
         
