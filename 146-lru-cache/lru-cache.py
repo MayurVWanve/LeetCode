@@ -36,7 +36,8 @@
             
 
 class LinkedList:
-    def __init__(self, val=0):
+    def __init__(self, key=0, val=0):
+        self.key = key
         self.val = val
         self.next = None
         self.prev = None           
@@ -50,27 +51,14 @@ class LRUCache:
         self.dummy_head, self.dummy_tail = LinkedList(), LinkedList()
         self.dummy_head.next, self.dummy_tail.prev = self.dummy_tail, self.dummy_head
 
-    
-    def deleteNode(self,key):
-        curr = self.dummy_head
-        while curr.next.val != key:
-            curr = curr.next
-
-        #Debug
-        # c = self.dummy_head
-        # print(f'Current : {curr.val}')
-        # while c:
-        #     print(c.val)
-        #     c = c.next
-        nextNode = curr.next.next
-        curr.next, nextNode.prev = nextNode, curr
-        return
 
     def get(self, key: int) -> int:
         
         if key in self.lookup:
-            self.deleteNode(key)
-            node = LinkedList(key)
+
+            node = self.lookup[key]
+            p, n = node.prev, node.next
+            p.next, n.prev = n, p
             last = self.dummy_tail.prev
             last.next, node.prev = node, last
             node.next, self.dummy_tail.prev = self.dummy_tail, node
@@ -78,10 +66,10 @@ class LRUCache:
 
             # c = self.dummy_head
             # while c:
-            #     print(c.val)
+            #     print(c.key)
             #     c = c.next
 
-            return self.lookup[key]
+            return node.val
         else:
             # print(" Get Worked Successfully")
             return -1
@@ -90,33 +78,41 @@ class LRUCache:
     def put(self, key: int, value: int) -> None:
 
         if key in self.lookup:
-            self.lookup[key] = value
-            self.deleteNode(key)
-            node = LinkedList(key)
+            
+            node = self.lookup[key]
+            node.val = value
+            p, n = node.prev, node.next
+            p.next, n.prev = n, p
             last = self.dummy_tail.prev
             last.next, node.prev = node, last
             node.next, self.dummy_tail.prev = self.dummy_tail, node
 
         elif self.count == self.capacity:
             node = self.dummy_head.next
-            # print(f'Node to be deleted: {node.val} LookupTable: {self.lookup}')
-            del(self.lookup[node.val])
-            self.deleteNode(node.val)
-            node = LinkedList(key)
+            nextN = node.next
+            self.dummy_head.next, nextN.prev = nextN, self.dummy_head
+            # print(f'Node to be deleted: {node.key} LookupTable: {self.lookup}')
+            del(self.lookup[node.key])
+            
+            node = LinkedList(key, value)
             last = self.dummy_tail.prev
             last.next, node.prev = node, last
             node.next, self.dummy_tail.prev = self.dummy_tail, node
-            self.lookup[key] = value
+            self.lookup[key] = node
  
         else:
-            node = LinkedList(key)
+            node = LinkedList(key, value)
             last = self.dummy_tail.prev
             last.next, node.prev = node, last
             node.next, self.dummy_tail.prev = self.dummy_tail, node
-            self.lookup[key] = value
+            self.lookup[key] = node
             self.count+=1
         
         # print(" Put Worked Successfully")
+        # c = self.dummy_head
+        # while c:
+        #     print(c.key)
+        #     c = c.next
 
 
 
