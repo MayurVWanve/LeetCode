@@ -2,13 +2,14 @@ from collections import defaultdict, deque
 
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # Topological Sort Logic
         graph, indegree, q,visited  = defaultdict(list), [0 for i in range(numCourses)], deque(), {}
 
         for i, j in prerequisites:
             if i == j:
                 return False
-            graph[j].append(i)
-            indegree[i] += 1
+            graph[i].append(j)
+            indegree[j] += 1
         
         for i in range(numCourses):
             if indegree[i] == 0:
@@ -29,6 +30,19 @@ class Solution:
 
         
         return True if len(visited) == numCourses else False
+
+        # n, graph, vis = len(numCourses), defaultdict(list), set()
+
+        # for i, j in prerequisites:
+        #     if i == j:
+        #         return False
+        #     graph[i].append(j)
+
+
+            
+
+
+
 
 
         
