@@ -1,10 +1,12 @@
-from collections import defaultdict
+from collections import defaultdict, deque
 
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        graph, indegree, q,visited  = defaultdict(list), [0 for i in range(numCourses)], [], {}
+        graph, indegree, q,visited  = defaultdict(list), [0 for i in range(numCourses)], deque(), {}
 
         for i, j in prerequisites:
+            if i == j:
+                return False
             graph[j].append(i)
             indegree[i] += 1
         
@@ -15,7 +17,7 @@ class Solution:
 
         
         while(q):
-            node = q.pop(0)
+            node = q.popleft()
             
             for i in graph[node]:
                 indegree[i] -= 1
