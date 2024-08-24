@@ -38,6 +38,8 @@ class Solution:
 
         for i in range(m):
             for j in range(n):
+                # if flag == True:
+                #     return flag
                 visited = set()
                 if board[i][j] == word[0]:
                     dfs(i,j,0)
