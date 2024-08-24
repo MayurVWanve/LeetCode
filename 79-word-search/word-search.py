@@ -1,48 +1,31 @@
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
-        m,n, flag = len(board), len(board[0]),False
+        m, n = len(board), len(board[0])
 
-        def dfs(i,j,pos):
-            nonlocal flag 
-            if i < 0 or  j< 0 or i >= m or j >= n or board[i][j] != word[pos]:
-                return 
+        def dfs(i, j, pos):
+            if i < 0 or j < 0 or i >= m or j >= n or board[i][j] != word[pos]:
+                return False
             
-            if pos == len(word)-1:
-                if board[i][j] == word[pos]:
-                    flag = True
-                return 
+            if pos == len(word) - 1:
+                return True  # Found the word
             
-            visited.add((i,j))
-
-            # we are at correct char
-            if (i+1,j) not in visited:
-                visited.add((i+1,j))
-                dfs(i+1,j, pos+1)
-                visited.remove((i+1,j))
-
-            if (i-1,j) not in visited:
-                visited.add((i-1,j))
-                dfs(i-1,j, pos+1)
-                visited.remove((i-1,j))
-
-            if (i,j+1) not in visited:
-                visited.add((i,j+1))
-                dfs(i,j+1, pos+1)
-                visited.remove((i,j+1))
-
-            if (i,j-1) not in visited:
-                visited.add((i,j-1))
-                dfs(i,j-1, pos+1)
-                visited.remove((i,j-1))
-
+            # Temporarily mark the cell as visited by changing its value
+            temp, board[i][j] = board[i][j], '#'
+            
+            # Explore all four directions
+            found = (dfs(i+1, j, pos+1) or
+                     dfs(i-1, j, pos+1) or
+                     dfs(i, j+1, pos+1) or
+                     dfs(i, j-1, pos+1))
+            
+            # Restore the cell's original value
+            board[i][j] = temp
+            
+            return found
 
         for i in range(m):
             for j in range(n):
-                if flag == True:
-                    return flag
-                visited = set()
-                if board[i][j] == word[0]:
-                    dfs(i,j,0)
+                if board[i][j] == word[0] and dfs(i, j, 0):
+                    return True  # If found, return True immediately
         
-
-        return flag
+        return False
