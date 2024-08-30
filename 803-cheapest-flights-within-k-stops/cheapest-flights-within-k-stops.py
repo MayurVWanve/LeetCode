@@ -25,31 +25,30 @@ class Solution:
 
         # return -1
 
-        distances = [float('inf')] * n
-        distances[src] = 0
+        soln = {i: float('inf') for i in range(n)}
+        soln[src] = 0
+        temp = soln.copy()
+        # print(soln)
 
-        # Temporary copy to keep track of updates in each iteration
-        temp = distances[:]
-
-        # Perform relaxations for at most k+1 edges
-        for i in range(k + 1):
-            # Copy the distances to start fresh for this round of edge relaxation
-            temp = distances[:]
-            updated = False  # Flag to check if any update was made in this iteration
-
+        for i in range(k+1):
+            # print(f'Soln before update: {soln}')
+            # print(f'Temp before update: {temp}')
+            temp = soln.copy()
+            flag = False
             for sr, des, pri in flights:
-                if distances[sr] != float('inf') and distances[sr] + pri < temp[des]:
-                    temp[des] = distances[sr] + pri
-                    updated = True  # An update was made
+                if soln[sr]!= float('inf') and soln[sr] + pri < temp[des]:
+                    # print(f'New Path Found {des} : {soln[sr]} + {pri}')
+                    temp[des] = soln[sr] + pri
+                    flag = True
 
-            # Update the distances array from the temporary array after all relaxations
-            distances = temp
-            # If no update was made, break early as no further updates will occur
-            if not updated:
+            soln = temp.copy()
+            if not flag:
                 break
 
-        # Check if the destination is reachable
-        return distances[dst] if distances[dst] != float('inf') else -1
+            # print(f'Soln after update: {soln}')
+            # print(f'Temp after update: {temp}')
+        
+        return soln[dst] if soln[dst] != float('inf') else -1
 
                 
 
