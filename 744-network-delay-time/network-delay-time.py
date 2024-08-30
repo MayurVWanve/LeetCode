@@ -20,8 +20,9 @@ class Solution:
                 for nei,new_time in graph[dst]:
                     heappush(minHeap,(new_time, dst, nei))
                 # print(f'Dist after the loop:{dist}, vis:{vis}')
+        maxtime = max(dist.values()) 
             
-        return max(dist.values()) if max(dist.values()) != float('inf') else -1              
+        return maxtime if maxtime != float('inf') else -1              
 
             
         
