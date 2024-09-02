@@ -28,7 +28,7 @@ class Solution:
             count[ele] += 1
         
         heap = [(-1 * val, key) for key, val in count.items()]
-        heapq.heapify(heap)
+        heapq.heapify(heap) #O(n)
         # print(heap)
 
         for i in range(k):
