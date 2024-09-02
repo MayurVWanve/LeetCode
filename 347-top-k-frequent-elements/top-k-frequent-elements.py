@@ -29,7 +29,7 @@ class Solution:
         
         heap = [(-1 * val, key) for key, val in count.items()]
         heapq.heapify(heap)
-        print(heap)
+        # print(heap)
 
         for i in range(k):
             _, ele = heapq.heappop(heap)
