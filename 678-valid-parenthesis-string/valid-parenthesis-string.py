@@ -30,11 +30,8 @@ class Solution:
             else:
                 count = max(0, count-1)
         
-        # print(stack)
-        if len(stack) == 0 or count==0:
-            return True
-        else:
-            return False
+
+        return True if (len(stack) == 0 or count==0) else False
         
 
 
