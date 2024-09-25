@@ -7,11 +7,11 @@ class Solution:
     def __init__(self):
             self.root = TrieNode()
             self.soln = 0
-            
+
     def longestCommonPrefix(self, arr1: List[int], arr2: List[int]) -> int:
         arr1, arr2 = set(arr1), set(arr2)
-
-        
+        if len(arr1) > len(arr2):
+            arr1, arr2 = arr2, arr1
 
         def add(ele):
             curr = self.root
