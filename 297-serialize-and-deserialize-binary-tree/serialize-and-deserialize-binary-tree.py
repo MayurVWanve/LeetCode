@@ -38,28 +38,28 @@ class Codec:
         data = list(data.split(','))
 
         # print(f'Decoded data: {data}, type: {type(data)}')
-        def construct(pos):
+        def construct(itr):
             # print(f"Current position: {pos}, value: {data[pos]}")  # Debug print
-
-            if data[pos] == 'N':
+            val = next(itr)
+            if val == 'N':
                 # print(f"Returning None for position: {pos}")  # Debug print
-                return None, pos
+                return None
             
             
             
 
-            node = TreeNode(int(data[pos]))
+            node = TreeNode(int(val))
 
             # print(f"Created TreeNode with value: {node.val} at position: {pos}")  # Debug print
 
-            node.left, l = construct(pos + 1)
-            node.right, r = construct(l + 1)
+            node.left = construct(itr)
+            node.right = construct(itr)
             # print(f"TreeNode with value: {node.val} has left child {node.left} and right child {node.right}")  # Debug print
-            return node, r
+            return node
 
         if len(data) == 1:
             return None
-        root, _ = construct(0)
+        root = construct(iter(data))
         # print(f"Root: {root.val}")  # Debug print
         return root
 
