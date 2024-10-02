@@ -6,6 +6,7 @@ class Solution:
         for i in range(n):
             lookup[arr[i]].append(i)
 
+        # print(lookup)
 
         arr.sort()
         for ele in arr:
