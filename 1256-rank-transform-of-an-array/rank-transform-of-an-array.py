@@ -6,17 +6,11 @@ class Solution:
         for i in range(n):
             lookup[arr[i]].append(i)
 
-        # print(lookup)
-
         temp = sorted(list(set(arr)))
-        print(temp)
         for ele in temp:
-            # if ele not in lookup:
-            #     continue
 
             for pos in lookup[ele]:
                 soln[pos] = rank
-            # del(lookup[ele])
             
             rank+=1
         
