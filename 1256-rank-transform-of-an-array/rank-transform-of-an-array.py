@@ -8,14 +8,15 @@ class Solution:
 
         # print(lookup)
 
-        arr.sort()
-        for ele in arr:
-            if ele not in lookup:
-                continue
+        temp = sorted(list(set(arr)))
+        print(temp)
+        for ele in temp:
+            # if ele not in lookup:
+            #     continue
 
             for pos in lookup[ele]:
                 soln[pos] = rank
-            del(lookup[ele])
+            # del(lookup[ele])
             
             rank+=1
         
