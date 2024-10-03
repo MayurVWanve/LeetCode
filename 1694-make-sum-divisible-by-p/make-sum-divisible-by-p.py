@@ -13,7 +13,7 @@ class Solution:
 
         for i, num in enumerate(nums):
             prefix_sum_mod = (prefix_sum_mod + num) % p
-            target_mod = (prefix_sum_mod - remainder) % p
+            target_mod = (prefix_sum_mod - remainder + p) % p
 
             # If we find a previous prefix sum with the required mod, we calculate the subarray length
             if target_mod in prefix_mod_index:
