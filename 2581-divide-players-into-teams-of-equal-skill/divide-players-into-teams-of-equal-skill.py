@@ -17,7 +17,7 @@ class Solution:
             else:
                 table[ele]+=1
             
-        print(soln)
+        # print(soln)
         return -1 if len(soln) != n//2 else sum(soln)
 
         
