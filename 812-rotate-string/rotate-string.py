@@ -4,14 +4,10 @@ class Solution:
 
         if m != n:
             return False
-
         for i in range(n):
             if goal[i] == s[0]:
                 lookup.add(i)
-
         for pos in lookup:
             if s == goal[pos:] + goal[:pos]:
                 return True
-
-        
         return False
