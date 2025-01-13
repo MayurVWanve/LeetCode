@@ -9,5 +9,6 @@ class Solution:
         for key, value in lookup.items():
             count +=2 if (value%2 == 0) else 1
 
+
         return count
         
